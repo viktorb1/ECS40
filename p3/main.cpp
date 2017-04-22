@@ -1,7 +1,7 @@
 // Author: Sean Davis 
 // Created on April 2, 2017, 3:51 PM
 
-#include <stdio.h>
+#include <iostream>
 #include "calendar.h"
 
 using namespace std;
@@ -13,20 +13,20 @@ int getChoice()
   
   while(true)
   {
-    printf("Calendar Menu\n");
-    printf("0. Done\n");
-    printf("1. Search for date.\n");
-    printf("2. Search for subject.\n");
-    printf("\nYour choice >> ");
-    scanf("%d", &choice);
+    cout << "Calendar Menu\n";
+    cout << "0. Done\n";
+    cout << "1. Search for date.\n";
+    cout << "2. Search for subject.\n";
+    cout << "\nYour choice >> ";
+    cin >> choice;
     
     if(choice >= 0 && choice < 3)
       break;
     
-    printf("Choice must be between 0 and 2.  Please try again.\n\n");
+    cout << "Choice must be between 0 and 2.  Please try again.\n\n";
   }  // while invalid choice
   
-  fgets(line, 80, stdin);
+  cin.getline(line, 80);
   return choice;
 } // getChoice()
 

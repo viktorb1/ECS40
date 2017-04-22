@@ -1,10 +1,13 @@
 // Author: Sean Davis
 
-#include <stdio.h>
-#include <stdlib.h>
-
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
 #include "day.h"
 #include "appt.h"
+
+using namespace std;
+
 
 void Day::create(int day1, int month1, int year1)
 {
@@ -20,7 +23,7 @@ void Day::destroy()
   for(int i = 0; i < apptCount; i++)
   {
     appts[i]->destroy();
-    free(appts[i]);
+    delete appts[i];
   } // for each appointment
 }  // destroy()
 
@@ -43,18 +46,18 @@ bool Day::lessThan(const Day *day2) const
 
 void Day::print() const
 {
-  printf("Start End   Subject      Location\n");
+  cout << "Start End   Subject      Location\n";
   
   for(int i = 0; i < apptCount; i++)
    appts[i]->print();
   
-  printf("\n");
+  cout << endl;
 } // print90
 
 void Day::read()
 {
   int pos;
-  Appointment *appointment = (Appointment*) malloc(sizeof(Appointment));
+  Appointment *appointment = new Appointment;
   appointment->read();
   
   for(pos = apptCount - 1; 
@@ -71,7 +74,8 @@ void Day::subjectSearch(const char *subject) const
   for(int i = 0; i < apptCount; i++)
     if(appts[i]->equal(subject))
     {
-      printf("%2d/%2d/%4d ", month, day, year);
+      cout << setw(2) << month << "/" << setw(2) << day << "/" << setw(2) 
+      << year << " ";
       appts[i]->print();
     } // if appointment has the subject
       

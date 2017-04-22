@@ -1,15 +1,19 @@
 // Author: Sean Davis
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
 #include "calendar.h"
 #include "day.h"
+
+using namespace std;
+
 
 void Calendar::create()
 {
   count = 0;
   size = 30;
-  days = (Day*) malloc(30 * sizeof(Day));
+  days = new Day[30];
 } // create()
 
 
@@ -27,7 +31,7 @@ void Calendar::dateSearch() const
       return;
     } // if found matching date
   
-  printf("That date was not found.\n");
+  cout << "That date was not found.\n";
 }  // dateSearch()
 
 
@@ -36,7 +40,7 @@ void Calendar::destroy()
   for(int i = 0; i < count; i++)
     days[i].destroy();
    
-  free(days);
+  delete [] days;
 }  // destroy()
 
 
@@ -45,10 +49,10 @@ void getDate(int *day, int *month, int *year)
   while(true)
   {
     char line[80], line2[80], *ptr;
-    printf("\nPlease enter the month, day, and year (mm/dd/yyyy) >> ");
+    cout << "\nPlease enter the month, day, and year (mm/dd/yyyy) >> ";
     
-    if (! fgets(line, 80, stdin))
-      printf(" is not a valid date.\nPlease try again.\n");
+    if (! cin.getline(line, 80))
+      cout << " is not a valid date.\nPlease try again.\n";
     else // User entered something
     {
       strtok(line, "\n");
@@ -74,20 +78,20 @@ void getDate(int *day, int *month, int *year)
          && *year >= 1000 && *year <= 2017)
          break;
       
-      printf("%s is not a valid date.\nPlease try again.\n", line2);
+      cout << line2 << " is not a valid date.\nPlease try again.\n";
     } // else use entered something
   } // while invalid date
 }  // getDate()
 
 void Calendar::readFile()
 {
-  FILE *fp = fopen("appts.csv", "r");
+  ifstream inf("appts.csv");
   char line[80];
   int day, month, year, pos;
   Day dayTemp;
-  fgets(line, 80, fp);  // get rid of label line
+  inf.getline(line, 80);  // get rid of label line
   
-  while(fgets(line, 80, fp))
+  while(inf.getline(line, 80))
   {
     month = atoi(strtok(line, "/"));
     day = atoi(strtok(NULL, "/"));
@@ -114,17 +118,17 @@ void Calendar::readFile()
     days[pos].read();
   } // while more lines in the file
   
-  fclose(fp);
+  inf.close();
 }  // readFile()
 
 void Calendar::resize()
 {
-  Day *temp = (Day*) malloc(size * 2 * sizeof(Day));
+  Day *temp = new Day[size * 2];
   
   for(int i = 0; i < count; i++)
     temp[i] = days[i];
   
-  free(days);
+  delete [] days;
   days = temp;
   size *= 2;
 }  // resize()
@@ -133,18 +137,18 @@ void Calendar::resize()
 void Calendar::subjectSearch() const
 {
   char subject[80];
-  printf("Please enter the subject >> ");
-  fgets(subject, 80, stdin);
+  cout << "Please enter the subject >> ";
+  cin.getline(subject, 80);
   
   if(strlen(subject) > 0)
     subject[strlen(subject) - 1] = '\0';  // eliminate the '\n'
   
-  printf("Date       Start End   Subject      Location\n");
+  cout << "Date       Start End   Subject      Location\n";
   
   for(int i = 0; i < count; i++)
     days[i].subjectSearch(subject);
   
-  printf("\n");
+  cout << endl;
 }  // subjectSearch()
 
 

@@ -1,16 +1,18 @@
 // Author: Sean Davis
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
+#include <iomanip>
+#include <cstring>
+#include <cstdlib>
 #include "appt.h"
 #include "time.h"
 
+using namespace std;
 
 void Appointment::destroy()
 {
-  free(subject);
-  free(location);
+  delete [] subject;
+  delete [] location;
 }  // destroy()
 
 
@@ -30,7 +32,7 @@ void Appointment::print() const
 {
   startTime.print();
   endTime.print();
-  printf("%-13s%s\n", subject, location);
+  cout << left << setw(13) << subject << location << endl << right;
 } // print()
 
 
@@ -38,12 +40,12 @@ void Appointment::read()
 {
   char *ptr;
   ptr = strtok(NULL, ",");
-  subject = (char*) malloc(strlen(ptr) + 1);
+  subject = new char[strlen(ptr) + 1];
   strcpy(subject, ptr);
   startTime.read();
   endTime.read();
   ptr = strtok(NULL, "\n");
-  location = (char*) malloc(strlen(ptr) + 1);
+  location = new char[strlen(ptr) + 1];
   strcpy(location, ptr);
 } // read()
 
