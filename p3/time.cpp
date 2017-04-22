@@ -5,14 +5,14 @@
 #include <stdlib.h>
 #include "time.h"
 
-bool Time::lessThan(Time *time2)
+bool Time::lessThan(const Time *time2) const
 {
   return hour < time2->hour 
     || (hour == time2->hour && minute < time2->minute);
 } // lessThan()
 
 
-void Time::print()
+void Time::print() const
 {
   printf("%02d:%02d ", hour, minute);
 } // print()

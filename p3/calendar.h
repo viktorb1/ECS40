@@ -12,11 +12,11 @@ class Calendar
 
 public:
   void create();
-  void dateSearch();
+  void dateSearch() const;
   void destroy();
   void readFile();
   void resize();
-  void subjectSearch();
+  void subjectSearch() const;
 }; // Calendar
 
 void getDate(int *day, int *month, int *year);

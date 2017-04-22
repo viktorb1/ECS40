@@ -9,8 +9,8 @@ class Time
   short minute;
 
 public:
-  bool lessThan(Time *time2);
-  void print();
+  bool lessThan(const Time *time2) const;
+  void print() const;
   void read();
 }; // Time
 

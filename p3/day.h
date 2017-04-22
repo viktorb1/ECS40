@@ -14,11 +14,11 @@ class Day
 public:
   void create(int day1, int month, int year);
   void destroy();
-  bool equal(Day *day2);
-  bool lessThan(Day *day2);
-  void print();
+  bool equal(const Day *day2) const;
+  bool lessThan(const Day *day2) const;
+  void print() const;
   void read();
-  void subjectSearch(char *subject);
+  void subjectSearch(const char *subject) const;
 }; // Day
 
 

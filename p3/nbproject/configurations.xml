@@ -18,9 +18,6 @@
                    projectFiles="true">
       <itemPath>Makefile</itemPath>
       <itemPath>appt.cpp</itemPath>
-      <itemPath>appts.csv</itemPath>
-      <itemPath>appts2.csv</itemPath>
-      <itemPath>authors.csv</itemPath>
       <itemPath>calendar.cpp</itemPath>
       <itemPath>day.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -56,12 +53,6 @@
       <item path="appt.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="appt.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="appts.csv" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="appts2.csv" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="authors.csv" ex="false" tool="3" flavor2="0">
       </item>
       <item path="calendar.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -103,12 +94,6 @@
       <item path="appt.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="appt.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="appts.csv" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="appts2.csv" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="authors.csv" ex="false" tool="3" flavor2="0">
       </item>
       <item path="calendar.cpp" ex="false" tool="1" flavor2="0">
       </item>
