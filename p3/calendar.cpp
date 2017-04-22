@@ -5,15 +5,15 @@
 #include "calendar.h"
 #include "day.h"
 
-void create(Calendar *calendar)
+void Calendar::create()
 {
-  calendar->count = 0;
-  calendar->size = 30;
-  calendar->days = (Day*) malloc(30 * sizeof(Day));
+  count = 0;
+  size = 30;
+  days = (Day*) malloc(30 * sizeof(Day));
 } // create()
 
 
-void dateSearch(Calendar *calendar)
+void Calendar::dateSearch()
 {
   int day = -1, month = -1, year = -1;
   Day dayTemp;
@@ -21,9 +21,9 @@ void dateSearch(Calendar *calendar)
   create(&dayTemp, day, month, year);
   
   for(int i = 0; i < calendar->count; i++)
-    if(equal(&calendar->days[i], &dayTemp))
+    if(days[i].equal(&dayTemp))
     {
-      print(&calendar->days[i]);
+      days[i].print();
       return;
     } // if found matching date
   
@@ -31,10 +31,10 @@ void dateSearch(Calendar *calendar)
 }  // dateSearch()
 
 
-void destroy(Calendar *calendar)
+void Calendar::destroy()
 {
-  for(int i = 0; i < calendar->count; i++)
-    destroy(&calendar->days[i]);
+  for(int i = 0; i < count; i++)
+    days[i].destroy();
    
   free(calendar->days);
 }  // destroy()
@@ -79,7 +79,7 @@ void getDate(int *day, int *month, int *year)
   } // while invalid date
 }  // getDate()
 
-void readFile(Calendar *calendar)
+void Calendar::readFile()
 {
   FILE *fp = fopen("appts.csv", "r");
   char line[80];
@@ -95,42 +95,42 @@ void readFile(Calendar *calendar)
     create(&dayTemp, day, month, year);
     
     for(pos = 0; 
-      pos < calendar->count && !equal(&dayTemp, &calendar->days[pos]); 
+      pos < count && !dayTemp.equal(&days[pos]); 
       pos++); 
     
-    if(pos == calendar->count) // not found
+    if(pos == count) // not found
     {
-      if(calendar->count == calendar->size)
-        resize(calendar);
+      if(count == size)
+        calendar.resize();
       
-      for(pos = calendar->count - 1; 
-        pos >= 0 && lessThan(&dayTemp, &calendar->days[pos]); pos--)
-          calendar->days[pos + 1] = calendar->days[pos];
+      for(pos = count - 1; 
+        pos >= 0 && dayTemp.lessThan(&days[pos]); pos--)
+          days[pos + 1] = days[pos];
       
-      calendar->days[++pos] = dayTemp;  // copy the new day into pos + 1
-      calendar->count++;
+      days[++pos] = dayTemp;  // copy the new day into pos + 1
+      count++;
     } // if not found
     
-    read(&calendar->days[pos]);
+    days[pos].read();
   } // while more lines in the file
   
   fclose(fp);
 }  // readFile()
 
-void resize(Calendar *calendar)
+void Calendar::resize()
 {
-  Day *temp = (Day*) malloc(calendar->size * 2 * sizeof(Day));
+  Day *temp = (Day*) malloc(size * 2 * sizeof(Day));
   
-  for(int i = 0; i < calendar->count; i++)
-    temp[i] = calendar->days[i];
+  for(int i = 0; i < count; i++)
+    temp[i] = days[i];
   
   free(calendar->days);
-  calendar->days = temp;
-  calendar->size *= 2;
+  days = temp;
+  size *= 2;
 }  // resize()
 
 
-void subjectSearch(Calendar *calendar)
+void Calendar::subjectSearch()
 {
   char subject[80];
   printf("Please enter the subject >> ");
@@ -141,8 +141,8 @@ void subjectSearch(Calendar *calendar)
   
   printf("Date       Start End   Subject      Location\n");
   
-  for(int i = 0; i < calendar->count; i++)
-    subjectSearch(&calendar->days[i], subject);
+  for(int i = 0; i < count; i++)
+    days[i].subjectSearch(subject);
   
   printf("\n");
 }  // subjectSearch()

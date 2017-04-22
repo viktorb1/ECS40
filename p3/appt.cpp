@@ -7,43 +7,43 @@
 #include "time.h"
 
 
-void destroy(Appointment *appointment)
+void Appointment::destroy()
 {
-  free(appointment->subject);
-  free(appointment->location);
+  free(subject);
+  free(location);
 }  // destroy()
 
 
-bool equal(Appointment *appointment, char *subject)
+bool Appointment::equal(char *subjectInput)
 {
-  return strstr(appointment->subject, subject) != NULL;
+  return strstr(subject, subjectInput) != NULL;
 }  // equal()
 
 
-bool lessThan(Appointment *appointment1, Appointment *appointment2)
+bool Appointment::lessThan(Appointment *appointment2)
 {
-  return lessThan(&appointment1->startTime, &appointment2->startTime); 
+  return startTime.lessThan(&appointment2->startTime); 
 }  // lessThan()
 
 
-void print(Appointment *appointment)
+void Appointment::print()
 {
-  print(&appointment->startTime);
-  print(&appointment->endTime);
-  printf("%-13s%s\n", appointment->subject, appointment->location);
+  startTime.print();
+  endTime.print();
+  printf("%-13s%s\n", subject, location);
 } // print()
 
 
-void read(Appointment *appointment)
+void Appointment::read()
 {
   char *ptr;
   ptr = strtok(NULL, ",");
-  appointment->subject = (char*) malloc(strlen(ptr) + 1);
-  strcpy(appointment->subject, ptr);
-  read(&appointment->startTime);
-  read(&appointment->endTime);
+  subject = (char*) malloc(strlen(ptr) + 1);
+  strcpy(subject, ptr);
+  startTime.read();
+  endTime.read();
   ptr = strtok(NULL, "\n");
-  appointment->location = (char*) malloc(strlen(ptr) + 1);
-  strcpy(appointment->location, ptr);
+  location = (char*) malloc(strlen(ptr) + 1);
+  strcpy(location, ptr);
 } // read()
 

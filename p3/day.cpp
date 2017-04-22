@@ -6,73 +6,73 @@
 #include "day.h"
 #include "appt.h"
 
-void create(Day *day, int day1, int month, int year)
+void Day::create(int day1, int month1, int year1)
 {
-  day->day = day1;
-  day->month = month;
-  day->year = year;
-  day->apptCount = 0;
+  day = day1;
+  month = month1;
+  year = year1;
+  apptCount = 0;
 }  // create()
 
 
-void destroy(Day *day)
+void Day::destroy()
 {
-  for(int i = 0; i < day->apptCount; i++)
+  for(int i = 0; i < apptCount; i++)
   {
-    destroy(day->appts[i]);
-    free(day->appts[i]);
+    appts[i].destroy();
+    free(appts[i]);
   } // for each appointment
 }  // destroy()
 
 
-bool equal(Day *day1, Day *day2)
+bool Day::equal(Day *day2)
 {
-  return day1->day == day2->day && day1->month == day2->month 
-    && day1->year == day2->year;
+  return day == day2->day && month == day2->month 
+    && year == day2->year;
 } // equal()
 
 
-bool lessThan(Day *day1, Day *day2)
+bool Day::lessThan(Day *day2)
 {
-  return (day1->year < day2->year)
-    || (day1->year == day2->year && day1->month < day2->month)
-    || (day1->year == day2->year && day1->month == day2->month 
-      && day1->day < day2->day); 
+  return (year < day2->year)
+    || (year == day2->year && month < day2->month)
+    || (year == day2->year && month == day2->month 
+      && day < day2->day); 
 } // lessThan()
 
 
-void print(Day *day)
+void Day::print()
 {
   printf("Start End   Subject      Location\n");
   
-  for(int i = 0; i < day->apptCount; i++)
-    print(day->appts[i]);
+  for(int i = 0; i < apptCount; i++)
+    appts[i].print();
   
   printf("\n");
-} // print90
+} // print()
 
-void read(Day *day)
+void Day::read()
 {
   int pos;
   Appointment *appointment = (Appointment*) malloc(sizeof(Appointment));
-  read(appointment);
+  appointment.read();
   
-  for(pos = day->apptCount - 1; 
-    pos >= 0 && lessThan(appointment, day->appts[pos]); pos--)
-      day->appts[pos + 1] = day->appts[pos];
+  for(pos = apptCount - 1; 
+    pos >= 0 && appointment.lessThan(appts[pos]); pos--)
+      appts[pos + 1] = appts[pos];
   
-  day->appts[pos + 1] = appointment;
-  day->apptCount++;
+  appts[pos + 1] = appointment;
+  apptCount++;
 } // read()
 
 
-void subjectSearch(Day *day, char *subject)
+void Day::subjectSearch(char *subject)
 {
-  for(int i = 0; i < day->apptCount; i++)
-    if(equal(day->appts[i], subject))
+  for(int i = 0; i < apptCount; i++)
+    if(appts[i].equal(subject))
     {
       printf("%2d/%2d/%4d ", day->month, day->day, day->year);
-      print(day->appts[i]);
+      appts[i].print();
     } // if appointment has the subject
       
 } // subjectSearch()

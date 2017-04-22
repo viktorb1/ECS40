@@ -3,16 +3,16 @@
 #ifndef TIME_H
 #define	TIME_H
 
-typedef struct
+class Time
 {
   short hour;
   short minute;
-}  Time;
 
-bool lessThan(Time *time1, Time *time2);
-void print(Time *time);
-void read(Time *time);
-
+  public:
+    bool lessThan(Time *time2);
+    void print();
+    void read();
+}; // class Time
 
 #endif	// TIME_H 
 
