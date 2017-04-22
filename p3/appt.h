@@ -12,9 +12,9 @@ class Appointment
   
 public:
   void destroy();
-  bool equal(char *subject);
-  bool lessThan(Appointment *appointment2);
-  void print();
+  bool equal(const char *subject) const;
+  bool lessThan(const Appointment *appointment2) const;
+  void print() const;
   void read();
   
 }; // class Appointment

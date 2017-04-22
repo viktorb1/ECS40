@@ -13,7 +13,7 @@ void Calendar::create()
 } // create()
 
 
-void Calendar::dateSearch()
+void Calendar::dateSearch() const
 {
   int day = -1, month = -1, year = -1;
   Day dayTemp;
@@ -130,7 +130,7 @@ void Calendar::resize()
 }  // resize()
 
 
-void Calendar::subjectSearch()
+void Calendar::subjectSearch() const
 {
   char subject[80];
   printf("Please enter the subject >> ");

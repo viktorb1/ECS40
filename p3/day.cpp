@@ -25,14 +25,14 @@ void Day::destroy()
 }  // destroy()
 
 
-bool Day::equal(Day *day2)
+bool Day::equal(const Day *day2) const
 {
   return day == day2->day && month == day2->month 
     && year == day2->year;
 } // equal()
 
 
-bool Day::lessThan(Day *day2)
+bool Day::lessThan(const Day *day2) const
 {
   return (year < day2->year)
     || (year == day2->year && month < day2->month)
@@ -41,7 +41,7 @@ bool Day::lessThan(Day *day2)
 } // lessThan()
 
 
-void Day::print()
+void Day::print() const
 {
   printf("Start End   Subject      Location\n");
   
@@ -66,7 +66,7 @@ void Day::read()
 } // read()
 
 
-void Day::subjectSearch(char *subject)
+void Day::subjectSearch(const char *subject) const
 {
   for(int i = 0; i < apptCount; i++)
     if(appts[i].equal(subject))

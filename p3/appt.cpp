@@ -14,19 +14,19 @@ void Appointment::destroy()
 }  // destroy()
 
 
-bool Appointment::equal(char *subjectInput)
+bool Appointment::equal(const char *subjectInput) const
 {
   return strstr(subject, subjectInput) != NULL;
 }  // equal()
 
 
-bool Appointment::lessThan(Appointment *appointment2)
+bool Appointment::lessThan(const Appointment *appointment2) const
 {
   return startTime.lessThan(&appointment2->startTime); 
 }  // lessThan()
 
 
-void Appointment::print()
+void Appointment::print() const
 {
   startTime.print();
   endTime.print();
