@@ -36,7 +36,7 @@ void Calendar::destroy()
   for(int i = 0; i < count; i++)
     days[i].destroy();
    
-  free(calendar->days);
+  free(days);
 }  // destroy()
 
 
@@ -101,7 +101,7 @@ void Calendar::readFile()
     if(pos == count) // not found
     {
       if(count == size)
-        this->resize();
+        resize(); // i think this can also be this->resize();
       
       for(pos = count - 1; 
         pos >= 0 && dayTemp.lessThan(&days[pos]); pos--)
@@ -124,13 +124,13 @@ void Calendar::resize()
   for(int i = 0; i < count; i++)
     temp[i] = days[i];
   
-  free(calendar->days);
+  free(days);
   days = temp;
   size *= 2;
 }  // resize()
 
 
-void Calendar::subjectSearch() const
+void Calendar::subjectSearch()
 {
   char subject[80];
   printf("Please enter the subject >> ");

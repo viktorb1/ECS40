@@ -25,14 +25,14 @@ void Day::destroy()
 }  // destroy()
 
 
-bool Day::equal(const Day *day2) const
+bool Day::equal(Day *day2)
 {
   return day == day2->day && month == day2->month 
     && year == day2->year;
 } // equal()
 
 
-bool Day::lessThan(const Day *day2) const
+bool Day::lessThan(Day *day2)
 {
   return (year < day2->year)
     || (year == day2->year && month < day2->month)
@@ -41,15 +41,15 @@ bool Day::lessThan(const Day *day2) const
 } // lessThan()
 
 
-void Day::print() const
+void Day::print()
 {
   printf("Start End   Subject      Location\n");
   
   for(int i = 0; i < apptCount; i++)
-    appts[i]->print();
+   appts[i]->print();
   
   printf("\n");
-} // print()
+} // print90
 
 void Day::read()
 {
@@ -66,12 +66,12 @@ void Day::read()
 } // read()
 
 
-void Day::subjectSearch(const char *subject) const
+void Day::subjectSearch(char *subject)
 {
   for(int i = 0; i < apptCount; i++)
     if(appts[i]->equal(subject))
     {
-      printf("%2d/%2d/%4d ", day->month, day->day, day->year);
+      printf("%2d/%2d/%4d ", month, day, year);
       appts[i]->print();
     } // if appointment has the subject
       

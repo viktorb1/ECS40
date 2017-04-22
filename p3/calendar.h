@@ -9,16 +9,15 @@ class Calendar
   Day *days;
   int size;
   int count;
-  
+
 public:
   void create();
   void dateSearch();
   void destroy();
   void readFile();
   void resize();
-  void subjectSearch() const;
-}; // class Calendar
-
+  void subjectSearch();
+}; // Calendar
 
 void getDate(int *day, int *month, int *year);
 

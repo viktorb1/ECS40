@@ -9,14 +9,14 @@ class Appointment
   Time endTime;
   char *subject;
   char *location;
-  
+
 public:
   void destroy();
-  bool equal(const char *subject) const;
-  bool lessThan(const Appointment *appointment2) const;
-  void print() const;
+  bool equal(char *subject);
+  bool lessThan(Appointment *appointment2);
+  void print();
   void read();
-  
-}; // class Appointment
+}; // Appointment
+
 #endif	// APPT_H 
 
