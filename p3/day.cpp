@@ -19,7 +19,7 @@ void Day::destroy()
 {
   for(int i = 0; i < apptCount; i++)
   {
-    appts[i].destroy();
+    appts[i]->destroy();
     free(appts[i]);
   } // for each appointment
 }  // destroy()
@@ -46,7 +46,7 @@ void Day::print() const
   printf("Start End   Subject      Location\n");
   
   for(int i = 0; i < apptCount; i++)
-    appts[i].print();
+    appts[i]->print();
   
   printf("\n");
 } // print()
@@ -55,10 +55,10 @@ void Day::read()
 {
   int pos;
   Appointment *appointment = (Appointment*) malloc(sizeof(Appointment));
-  appointment.read();
+  appointment->read();
   
   for(pos = apptCount - 1; 
-    pos >= 0 && appointment.lessThan(appts[pos]); pos--)
+    pos >= 0 && appointment->lessThan(appts[pos]); pos--)
       appts[pos + 1] = appts[pos];
   
   appts[pos + 1] = appointment;
@@ -69,10 +69,10 @@ void Day::read()
 void Day::subjectSearch(const char *subject) const
 {
   for(int i = 0; i < apptCount; i++)
-    if(appts[i].equal(subject))
+    if(appts[i]->equal(subject))
     {
       printf("%2d/%2d/%4d ", day->month, day->day, day->year);
-      appts[i].print();
+      appts[i]->print();
     } // if appointment has the subject
       
 } // subjectSearch()

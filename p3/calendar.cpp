@@ -13,14 +13,14 @@ void Calendar::create()
 } // create()
 
 
-void Calendar::dateSearch() const
+void Calendar::dateSearch()
 {
   int day = -1, month = -1, year = -1;
   Day dayTemp;
   getDate(&day, &month, &year);
-  create(&dayTemp, day, month, year);
+  dayTemp.create(day, month, year);
   
-  for(int i = 0; i < calendar->count; i++)
+  for(int i = 0; i < count; i++)
     if(days[i].equal(&dayTemp))
     {
       days[i].print();
@@ -92,7 +92,7 @@ void Calendar::readFile()
     month = atoi(strtok(line, "/"));
     day = atoi(strtok(NULL, "/"));
     year = atoi(strtok(NULL, ","));
-    create(&dayTemp, day, month, year);
+    dayTemp.create(day, month, year);
     
     for(pos = 0; 
       pos < count && !dayTemp.equal(&days[pos]); 
@@ -101,7 +101,7 @@ void Calendar::readFile()
     if(pos == count) // not found
     {
       if(count == size)
-        calendar.resize();
+        this->resize();
       
       for(pos = count - 1; 
         pos >= 0 && dayTemp.lessThan(&days[pos]); pos--)

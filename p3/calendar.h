@@ -12,13 +12,15 @@ class Calendar
   
 public:
   void create();
-  void dateSearch() const;
+  void dateSearch();
   void destroy();
-  void getDate(int *day, int *month, int *year);
   void readFile();
   void resize();
   void subjectSearch() const;
 }; // class Calendar
+
+
+void getDate(int *day, int *month, int *year);
 
 #endif	// CALENDAR_H 
 

@@ -35,21 +35,21 @@ int main()
 {
   Calendar calendar;
   int choice;
-  create(&calendar);
-  readFile(&calendar);
+  calendar.create();
+  calendar.readFile();
   choice = getChoice();
   
   while(choice)
   {
     if(choice == 1)
-      dateSearch(&calendar);
+      calendar.dateSearch();
     else // choice not 1
-      subjectSearch(&calendar);
+      calendar.subjectSearch();
   
     choice = getChoice();
   } // while choice not 0.
 
-  destroy(&calendar);
+  calendar.destroy();
   return 0;
 } // main())
 
