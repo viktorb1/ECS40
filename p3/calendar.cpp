@@ -44,7 +44,7 @@ void Calendar::destroy()
 }  // destroy()
 
 
-void getDate(int *day, int *month, int *year)
+void Calendar::getDate(int *day, int *month, int *year) const
 {
   while(true)
   {

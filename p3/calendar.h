@@ -14,12 +14,12 @@ public:
   void create();
   void dateSearch() const;
   void destroy();
+  void getDate(int *day, int *month, int *year) const;
   void readFile();
   void resize();
   void subjectSearch() const;
 }; // Calendar
 
-void getDate(int *day, int *month, int *year);
 
 #endif	// CALENDAR_H 
 
