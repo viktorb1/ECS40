@@ -2,3 +2,6 @@
 *.exe
 private/
 *.out
+*.zip
+*.rar
+*.pdf
