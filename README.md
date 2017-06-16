@@ -1,1 +1,1 @@
-# ECS 40 Programs Homework
+# ECS 40 Programs
