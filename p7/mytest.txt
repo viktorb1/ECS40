@@ -1,0 +1,4 @@
+I 2 18  ECS 40
+I 4 23  until dawn,
+R 6 7 12 midterms
+R 3 9 11 not
