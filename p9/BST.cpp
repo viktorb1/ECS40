@@ -59,11 +59,8 @@ void BST<T>::pop(T &value, BSTNode<T>* &node)
     BSTNode<T>* temp = node;
 
     if(node->right)
-    {
-      node = new BSTNode<T>(node->right->value, NULL, NULL);
-      delete node->right;
-    } // if a right node exists in the last left node of the tree
-    else // a right node did not exist
+      node = node->right;
+    else
       node = NULL;
 
     delete temp;
